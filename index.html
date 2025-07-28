@@ -11,6 +11,8 @@
     <p id="gameOutput">Game results will appear here.</p>
 
     <script>
+        
+
         //Welcome ask for name
         let pname = prompt("Welcome to Bear Hunter Ninja! Please enter yout name to get started:");
         //display name and move on to game
@@ -19,8 +21,39 @@
         //ask player to chose Bear Ninja or Hunter
         let cchoice = "Bear";
         let pchoice = prompt("Who are you Bear, Ninja, or Hunter?");
-        let result = `${pname}, you picked ${pchoice}!<br>The computer picked ${cchoice}!`;
-        let resultcon = `${pname}, you picked ${pchoice}! \nThe computer picked ${cchoice}!`;
+        //capitlise the first letter to match with the rest of the code
+        switch (pchoice) {
+            case "bear": 
+                pchoice = "Bear";
+                break;
+            case "ninja": 
+                pchoice = "Ninja";
+                break;
+            case "hunter":
+                pchoice = "Hunter";
+        }
+        //game logic Bear beats Ninja, Ninja beats Hunter, and Hunter beats Bear. 
+        let winner;
+        // if player and computer are the same its a tie. 
+        if (pchoice === cchoice) {
+            winner = "It's a tie!"
+        } else if (
+            //all the player win combnations  AND for the choices and OR for each possiability
+            (pchoice === "Bear" && cchoice === "Ninja") || 
+            (pchoice === "Ninja" && cchoice === "Hunter") || 
+            (pchoice === "Hunter" && cchoice === "Bear")){
+                winner = "You Win!!"
+            } else if (
+                // all computer win combnations same as above just with the computer winning
+            (pchoice === "Bear" && cchoice === "Hunter") || 
+            (pchoice === "Ninja" && cchoice === "Bear") || 
+            (pchoice === "Hunter" && cchoice === "Ninja")){
+                winner = "You Lose!!"
+            }
+        
+
+        let result = `${pname}, you picked ${pchoice}!<br>The computer picked ${cchoice}!<br>${winner}`;
+        let resultcon = `${pname}, you picked ${pchoice}!\nThe computer picked ${cchoice}!\n${winner}`;
         //message to the HTML page
         document.getElementById("gameOutput").innerHTML = result;
         //message to console
